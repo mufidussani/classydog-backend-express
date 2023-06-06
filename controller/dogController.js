@@ -12,15 +12,22 @@ exports.getAllDogs = (req, res) => {
     });
 };
 
-exports.createHistoryDog = async (req, res) => {
-  const { dog_name, dog_image } = req.body;
-
+exports.createDogHistory = async (req, res) => {
   try {
-    const historyDog = new HistoryDog({ dog_name, dog_image });
-    await historyDog.save();
-    res.status(200).json({ message: "Dog history created successfully" });
+    const { dog_name, dog_image } = req.body;
+
+    const history = new HistoryDog({
+      dog_name,
+      dog_image,
+    });
+
+    await history.save();
+
+    res.status(201).json({ success: true });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error("Error:", error);
+    res
+      .status(500)
+      .json({ success: false, error: "Failed to create dog history" });
   }
 };
