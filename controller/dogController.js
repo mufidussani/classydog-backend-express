@@ -12,7 +12,7 @@ exports.getAllDogs = (req, res) => {
     });
 };
 
-exports.createDogHistory = async (req, res) => {
+exports.createHistoryDog = async (req, res) => {
   try {
     const { dog_name, dog_image } = req.body;
 
